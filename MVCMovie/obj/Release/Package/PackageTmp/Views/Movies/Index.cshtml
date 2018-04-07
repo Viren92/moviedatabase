@@ -1,0 +1,79 @@
+﻿@model IEnumerable<MVCMovie.Models.Movie>
+
+@{
+    ViewBag.Title = "Highest Grossing Films";
+}
+
+<h2>HIGHEST GROSSING FILMS!</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create","MoviesController", new { @class = "button" })
+
+    @using (Html.BeginForm("Index", "Movies", FormMethod.Get))
+    {
+    <p>
+        Genre: @Html.DropDownList("movieGenre", "All")
+        Title: @Html.TextBox("SearchString") <br />
+        <input type="submit" value="Filter" class="button" />
+    </p>
+    }
+    
+</p>
+<table class="table">
+    <tr class= "Luc" >
+        <th class="Luc">
+            @Html.DisplayNameFor(model => model.Picture)
+        </th>
+        <th class="Luc">
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th class="Luc">
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th class="Luc">
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+        <th class="Luc">
+            @Html.DisplayNameFor(model => model.TotalGross)
+        </th>
+        <th class="Luc">
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th class="Luc">
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr class= "Luc" >
+        <td>
+            <img src="@Url.Content(item.Picture ?? "~/empty-image.jpg")" alt="Image" height="50" width="50" class="img-circle img-responsive" />
+        </td>
+        <td class="Luc">
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td class="Luc">
+            @Html.DisplayFor(modelItem => item.ReleaseDate)
+        </td>
+        <td class="Luc">
+            @Html.DisplayFor(modelItem => item.Genre)
+        </td>
+        <td class="Luc">
+            @Html.DisplayFor(modelItem => item.TotalGross)
+        </td>
+        <td class="Luc">
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td class="Luc">
+            @Html.DisplayFor(modelItem => item.Rating)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID } , new { @class = "button" } ) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }, new { @class = "button" }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID }, new { @class = "button" })
+        </td>
+    </tr>
+}
+
+</table>
